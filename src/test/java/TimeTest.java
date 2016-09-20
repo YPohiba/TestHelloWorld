@@ -1,7 +1,5 @@
 import org.junit.Test;
 
-import java.util.Date;
-
 import static junit.framework.Assert.*;
 
 public class TimeTest {
@@ -38,17 +36,5 @@ public class TimeTest {
 
         assertNotNull("Result (" + actual + ") NULL",actual);
         assertEquals(expected,actual);
-    }
-
-    @Test
-    public void testGetHours() throws Exception {
-        Date source = new Date(1220227200); //1970-01-15T 04:57:07.200+0200
-        int expected = 4;
-
-        Time time = new Time();
-        int actual = time.getCurrentHours(source);
-
-        assertTrue("Result (" + actual + ") is not 4", actual == expected);
-        assertSame(expected, actual);
     }
 }
