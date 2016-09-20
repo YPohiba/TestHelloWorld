@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="avalon-util:avalon-util-i18n:1.0" type="repository">
+    <properties maven-id="avalon-util:avalon-util-i18n:1.0" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/avalon-util/avalon-util-i18n/1.0/avalon-util-i18n-1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
