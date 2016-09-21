@@ -1,4 +1,3 @@
-import config.ConfigLog;
 import org.apache.log4j.Logger;
 
 import java.util.Date;
@@ -8,35 +7,40 @@ import java.util.ResourceBundle;
 
 public class Main {
 
-    private static final String LOG_PROPERTY_FILE = "src/main/resources/log4j.properties";
     private static final Logger log = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
-        ConfigLog logConfig = new ConfigLog(LOG_PROPERTY_FILE);
-        logConfig.init();
-
-        log.info("Starting");
+        log.info("Starting.");
 
         Locale currentLocale = Locale.getDefault();
         ResourceBundle resourceBundle = ResourceBundle.getBundle("message",currentLocale);
 
-        log.info("Regional settings: " + currentLocale);
+        log.info("Regional settings: " + currentLocale + ".");
 
         Date currentDate = new Date();
-        Time time = new Time();
+        Time time = new Time(currentDate);
 
-        String currentTime = time.getCurrentTime(time.getCurrentHours(currentDate));
+        String currentTime = time.getCurrentTime();
 
         outputDisplay(resourceBundle,currentTime);
+
+        log.info("Program completion.");
     }
 
     private static void outputDisplay(ResourceBundle resourceBundle, String currentTime){
-        try {
-            String result = resourceBundle.getString(currentTime);
-            System.out.println(result);
-            log.info("Result = " + result);
-        } catch (MissingResourceException e){
-            log.error("Can't find resource for bundle java.util.PropertyResourceBundle, key " + currentTime);
+        log.info("Result output to the screen.");
+        if (resourceBundle != null && !currentTime.equals("")) {
+            try {
+                String result = resourceBundle.getString(currentTime);
+                log.info("Result = " + result);
+                System.out.println(result);
+            } catch (MissingResourceException e) {
+                log.error("Can't find resource for bundle java.util.PropertyResourceBundle, key " + currentTime + ".");
+                System.out.println("An error has happened. For details, see the log file.");
+            }
+        } else {
+            log.error("Incorrect variable value (resourceBundle) or (currentTime).");
+            System.out.println("An error has happened. For details, see the log file.");
         }
     }
 }

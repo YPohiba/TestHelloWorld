@@ -9,8 +9,8 @@ import static junit.framework.Assert.*;
 public class MainTest {
 
     @Test
-    public void testGetHelloMorningEN() throws MissingResourceException {
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("message", new Locale("EN", "US"));
+    public void testGetHelloMorningEN() throws Exception {
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("message", new Locale("en", "US"));
 
         String source = "morning";
         String expected = "Good morning, World!";
@@ -21,20 +21,20 @@ public class MainTest {
     }
 
     @Test
-    public void testGetHelloDayEN() throws MissingResourceException {
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("message", new Locale("", ""));
+    public void testGetHelloDayEN() throws Exception {
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("message", new Locale("en", "US"));
 
         String source = "day";
-        String expected = "Доброй ночи, Мир!";
+        String expected = "Good day, World!";
 
         String actual = resourceBundle.getString(source);
 
-        assertFalse("Result (" + actual + ") is Доброй ночи, Мир!", actual.equals(expected));
+        assertEquals("Result (" + actual + ") is not Good day, World!", expected, actual);
     }
 
     @Test(expected = MissingResourceException.class)
     public void testExpectedMessageKey(){
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("message", new Locale("EN", "US"));
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("message", new Locale("en", "US"));
 
         String source = "lunch";
 
@@ -42,13 +42,25 @@ public class MainTest {
     }
 
     @Test
-    public void testNotNullParamOutput(){
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("message", new Locale("EN", "US"));
+    public void testNotNullParamOutputEN(){
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("message", new Locale("en", "US"));
 
         String source = "evening";
 
         String actual = resourceBundle.getString(source);
 
         assertNotNull("Result (" + actual + ") NULL", actual);
+    }
+
+    @Test
+    public void testGetHelloNightRU() throws Exception {
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("message", new Locale("ru", "RU"));
+
+        String source = "night";
+        String expected = "Доброй ночи, Мир!";
+
+        String actual = resourceBundle.getString(source);
+
+        assertTrue("Result (" + actual + ") is not Доброй ночи, Мир!", actual.equals(expected));
     }
 }
